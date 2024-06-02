@@ -13,8 +13,6 @@
     "jest": "^29.7.0"
   },
   "dependencies": {
-    "convert-base": "^0.1.0",
-    "hex-to-bin": "^1.0.1",
     "hex-to-binary": "^1.0.1"
   }
 }
