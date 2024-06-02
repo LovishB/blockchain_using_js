@@ -1,5 +1,6 @@
 //this is a reference to the cryptoHash funstion in crypto-hash file
 const cryptoHash = require('./crypto-hash');
+const hexToBinary = require('hex-to-binary');
 const { GENESIS_DATA, MINE_RATE } = require('./config');
 
 class Block {
@@ -33,12 +34,16 @@ class Block {
             difficulty = this.adjustDifficulty({lastBlockDifficulty: lastBlock.difficulty, 
                 lastBlockTimestamp: lastBlock.timestamp, newTimestamp: timestamp });
             hash = cryptoHash(timestamp, lastHash, data, nonce, difficulty);
-        } while (hash.substring(0, difficulty) !== '0'.repeat(difficulty));
+        } while (hexToBinary(hash).substring(0, difficulty) !== '0'.repeat(difficulty));
         //1) let's assume difficulty is 4
         //2) hash.substring(0, difficulty) - it will give the string from index 0 to the index 4, 
         //   so you will give you 4 the leading digits
         //3) '0'.repeat(difficulty)- it will give 0000
-        //4) now we want to run the loop until the hash geerated will have 4 leading zeros
+        //4) now we want to run the loop until the hash generated will have 4 leading zeros
+
+        //while checking contiditon, we convert hex to binary for more precise average time using difficlity 
+        //since we need more leading zeros and our system can easily mine in hex 3-4 leading zeros.
+        // 0001 (hex) is equal to 0000 0000 0000 0001 (binary), so many zeros to work for
 
         return new Block({
             timestamp: timestamp,
