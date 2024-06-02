@@ -23,12 +23,17 @@ class Blockchain {
         for (let i = 1; i < chain.length; i++) {
             const { timestamp, lastHash, hash, data, nonce, difficulty } = chain[i];
             const actualLastHash = chain[i - 1].hash;
-
+            const lastDifficulty = chain[i - 1].difficulty;
+            
             //validating lasthash for rest of the block
             if (lastHash !== actualLastHash) return false;
 
             //validating new hash generation for rest of the block
             if (hash !== cryptoHash(timestamp, lastHash, data, nonce, difficulty)) return false;
+
+            //This check has been added so that no attacker can jump difficluty in their blockchain
+            //either reducing and quickly creating a longer chain or increasing the making blockchain slow
+            if (Math.abs(lastDifficulty - difficulty) > 1) return false;
         }
 
         return true;

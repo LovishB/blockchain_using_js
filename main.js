@@ -15,10 +15,10 @@ myBlockchain.addBlock({data: 'Fourth Transaction'});
 
 // console.log('Has two new blocks added to chain?')
 
-// myBlockchain.getChain().forEach((block, index) => {
-//         console.log(`Block ${index}:`);
-//         console.log(JSON.stringify(block, null, 4));
-//     });
+myBlockchain.getChain().forEach((block, index) => {
+        console.log(`Block ${index}:`);
+        console.log(JSON.stringify(block, null, 4));
+    });
 
     console.log('lets validate the blockchain');
 
