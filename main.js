@@ -9,7 +9,9 @@ const myBlockchain = new Blockchain();
 
 
 myBlockchain.addBlock({data: 'First Transaction'});
-// myBlockchain.addBlock({data: 'Second Transaction'});
+myBlockchain.addBlock({data: 'Second Transaction'});
+myBlockchain.addBlock({data: 'Third Transaction'});
+myBlockchain.addBlock({data: 'Fourth Transaction'});
 
 // console.log('Has two new blocks added to chain?')
 
@@ -18,9 +20,9 @@ myBlockchain.addBlock({data: 'First Transaction'});
 //         console.log(JSON.stringify(block, null, 4));
 //     });
 
-    // console.log('lets validate the blockchain');
+    console.log('lets validate the blockchain');
 
-    // console.log(Blockchain.isValidChain(myBlockchain.getChain()));
+    console.log(Blockchain.isValidChain(myBlockchain.getChain()));
 
 //     const myBlockchain2 = new Blockchain();
 //     myBlockchain2.addBlock({data: 'First Transaction'});

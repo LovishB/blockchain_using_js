@@ -21,14 +21,14 @@ class Blockchain {
         if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) return false;
 
         for (let i = 1; i < chain.length; i++) {
-            const { timestamp, lastHash, hash, data } = chain[i];
+            const { timestamp, lastHash, hash, data, nonce, difficulty } = chain[i];
             const actualLastHash = chain[i - 1].hash;
 
             //validating lasthash for rest of the block
             if (lastHash !== actualLastHash) return false;
 
             //validating new hash generation for rest of the block
-            if (hash !== cryptoHash(timestamp, lastHash, data)) return false;
+            if (hash !== cryptoHash(timestamp, lastHash, data, nonce, difficulty)) return false;
         }
 
         return true;

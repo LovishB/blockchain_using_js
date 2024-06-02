@@ -10,7 +10,7 @@ const cryptoHash = (...inputs) =>{
     //this will concat the values present in the array and post it for hashing
     hash.update(inputs.join(' '));
     
-    //digest represents the result of hashing in hex form
+    //digest represents the result of hashing in hex form (not in bit form for ease of use)
     return hash.digest('hex');
 };
 
