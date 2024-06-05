@@ -17,6 +17,5 @@ const GENESIS_DATA = {
 //server listening port
 const PORT = 3000;
 
-
 module.exports = { GENESIS_DATA, MINE_RATE, PORT };
 

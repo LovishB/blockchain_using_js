@@ -1,7 +1,7 @@
 const express = require('express');
-const Blockchain = require('./blockchain');
+const Blockchain = require('./blockchain/blockchain');
 const bodyParser = require('body-parser');
-const { PORT } = require('./config');
+const { PORT } = require('./util/config');
 
 //creating express app
 const app = express();
