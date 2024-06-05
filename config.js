@@ -2,7 +2,7 @@
 
 // if the last mine blocked was earlier or late 
 // compared to the global mine rate time, we will adjust difficilty
-const MINE_RATE = 800;
+const MINE_RATE = 4000;
 const INITIAL_DIFFICULTY = 2;
 
 const GENESIS_DATA = {
@@ -14,6 +14,9 @@ const GENESIS_DATA = {
     nonce: 0
 };
 
+//server listening port
+const PORT = 3000;
 
-module.exports = { GENESIS_DATA, MINE_RATE };
+
+module.exports = { GENESIS_DATA, MINE_RATE, PORT };
 
