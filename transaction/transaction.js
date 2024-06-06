@@ -3,19 +3,21 @@ const { v4: uuidv4 } = require('uuid');
 const { verifySignature } = require('../util/wallet-config');
 
 class Transaction {
-
     constructor({ senderWallet, recipient, amount }) {
-        this.id = uuidv4(); //adding unique id for transaction
+        this.id = uuidv4(); //gives unqiue id to transaction
         this.sender = senderWallet.publicKey;
         this.recipient = recipient;
         this.amount = amount;
-        this.senderBalance = senderWallet.balance;
         this.timestamp = Date.now();
-        const transactionData = this.createTransactionData(); 
-        this.signature = senderWallet.sign({transactionData}); //encrypting transaction data here using signing
+        this.senderBalance = senderWallet.balance;
+        this.signature = this.createSignature(senderWallet);
     }
 
-    // Method to create the transaction data
+    createSignature(senderWallet) {
+        const data = this.createTransactionData();
+        return senderWallet.sign({ data });
+    }
+
     createTransactionData() {
         return {
             sender: this.sender,
@@ -25,25 +27,33 @@ class Transaction {
         };
     }
 
-    //function to validate any transaction
     static validTransaction(transaction) {
         const { sender, amount, recipient, timestamp, signature, senderBalance } = transaction;
 
-        // Verify that the transaction amount is valid
-        if (amount <= 0 || amount > senderBalance) {
-            console.error(`Invalid transaction amount from ${sender}`);
+        // Check if the amount is not zero
+        if (amount <= 0) {
+            console.error('Transaction amount must be greater than zero');
             return false;
         }
 
-        // Verify the signature
-        if (!verifySignature({ publicKey: sender, data: { sender, recipient, amount, timestamp }, signature })) {
+        // Check if the amount is not more than the sender's balance
+        if (amount > senderBalance) {
+            console.error(`Transaction amount exceeds balance. Sender balance: ${senderBalance}, Amount: ${amount}`);
+            return false;
+        }
+
+        //verify signature 
+        if (!verifySignature({
+            publicKey: sender,
+            data: { sender, recipient, amount, timestamp },
+            signature
+        })) {
             console.error(`Invalid signature from ${sender}`);
             return false;
         }
 
         return true;
     }
-
 }
 
 module.exports = Transaction;
