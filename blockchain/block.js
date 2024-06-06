@@ -1,7 +1,7 @@
 //this is a reference to the cryptoHash funstion in crypto-hash file
-const cryptoHash = require('./crypto-hash');
+const cryptoHash = require('../util/crypto-hash');
 const hexToBinary = require('hex-to-binary');
-const { GENESIS_DATA, MINE_RATE } = require('./config');
+const { GENESIS_DATA, MINE_RATE } = require('../util/config');
 
 class Block {
 
