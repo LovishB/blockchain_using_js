@@ -20,5 +20,5 @@ To get a local copy up and running, follow these simple steps:
 - Install dependencies: npm install
 - Start the application: npm start
 - Use the API endpoints: 
-GET /blocks: Retrieves all blocks in the blockchain.
-POST /mine: Mines and adds a new block to the blockchain.
+GET /api/readBlockchain: Retrieves all blocks in the blockchain.
+POST /api/mineBlock: Mines and adds a new block to the blockchain.
